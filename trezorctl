@@ -1051,6 +1051,51 @@ def stellar_sign_transaction(connect, b64envelope, address, network_passphrase):
     return base64.b64encode(resp.signature)
 
 #
+# Tron functions
+#
+
+
+@cli.command(help='Get Tron address for specified path.')
+@click.option('-n', '--address', required=True, help="BIP-32 path, e.g. m/44'/195'/0'/0'")
+@click.option('-d', '--show-display', is_flag=True)
+@click.pass_obj
+def tron_get_address(connect, address, show_display):
+    client = connect()
+    address_n = tools.parse_path(address)
+    return client.tron_get_address(address_n, show_display)
+
+
+@cli.command(help='Get Tron public key for specified path.')
+@click.option('-n', '--address', required=True, help="BIP-32 path, e.g. m/44'/195'/0'/0'")
+@click.option('-d', '--show-display', is_flag=True)
+@click.pass_obj
+def tron_get_public_key(connect, address, show_display):
+    client = connect()
+    address_n = tools.parse_path(address)
+    res = client.tron_get_public_key(address_n, show_display)
+    output = {
+        "public_key": binascii.hexlify(res.public_key).decode()
+    }
+    return output
+
+
+@cli.command(help='Sign Tron transaction.')
+@click.option('-n', '--address', required=True, help="BIP-32 path to signing key, e.g. m/44'/195'/0'/0'")
+@click.argument('transaction')
+@click.pass_obj
+def tron_sign_tx(connect, address, transaction):
+    client = connect()
+    address_n = tools.parse_path(address)
+
+    result = client.tron_sign_tx(address_n, transaction)
+
+    payload = {
+        "signature": binascii.hexlify(result.signature).decode()
+    }
+
+    return payload
+
+#
 # Main
 #
 

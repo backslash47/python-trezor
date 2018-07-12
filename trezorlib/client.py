@@ -540,7 +540,7 @@ class ProtocolMixin(object):
         if isinstance(resp, proto.Success):
             return True
         return False
-
+    
     #
     # Lisk functions
     #
@@ -1137,6 +1137,26 @@ class ProtocolMixin(object):
                                 "Received a signature before processing all operations.")
 
         return resp
+
+    #
+    # Tron functions
+    #
+
+    @field('address')
+    @expect(proto.TronAddress)
+    def tron_get_address(self, n, show_display=False):
+        n = self._convert_prime(n)
+        return self.call(proto.TronGetAddress(address_n=n, show_display=show_display))
+
+    @expect(proto.TronPublicKey)
+    def tron_get_public_key(self, n, show_display=False):
+        n = self._convert_prime(n)
+        return self.call(proto.TronGetPublicKey(address_n=n, show_display=show_display))
+
+    @expect(proto.TronSignedTx)
+    def tron_sign_tx(self, n, t):
+        n = self._convert_prime(n)
+        return self.call(proto.TronSignTx(address_n=n, transaction=t))
 
 
 class TrezorClient(ProtocolMixin, TextUIMixin, BaseClient):

@@ -48,6 +48,9 @@ Use the following command to see all options:
     load_device              Load custom configuration to the device.
     nem_get_address          Get NEM address for specified path.
     nem_sign_tx              Sign (and optionally broadcast) NEM...
+    tron_get_address         Get Tron address for specified path.
+    tron_get_public_key      Get Tron public key for specified path.
+    tron_sign_tx             Sign Tron Transaction...
     ping                     Send ping message.
     recovery_device          Start safe recovery workflow.
     reset_device             Perform device setup and generate new seed.
