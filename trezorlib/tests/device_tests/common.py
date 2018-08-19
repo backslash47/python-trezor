@@ -33,7 +33,7 @@ class TrezorTest:
         debuglink = wirelink.find_debug()
         self.client = TrezorClientDebugLink(wirelink)
         self.client.set_debuglink(debuglink)
-        self.client.set_tx_api(coins.tx_api['Bitcoin'])
+        self.client.set_tx_api(coins.tx_api['Bitcore'])
         # self.client.set_buttonwait(3)
 
         #                     1      2     3    4      5      6      7     8      9    10    11    12

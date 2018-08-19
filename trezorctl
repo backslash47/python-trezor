@@ -38,6 +38,7 @@ from trezorlib import messages as proto
 from trezorlib import protobuf
 from trezorlib import stellar
 from trezorlib import tools
+from trezorlib import ontology
 
 
 class ChoiceType(click.Choice):
@@ -1049,6 +1050,103 @@ def stellar_sign_transaction(connect, b64envelope, address, network_passphrase):
     resp = client.stellar_sign_transaction(tx, operations, address_n, network_passphrase)
 
     return base64.b64encode(resp.signature)
+
+#
+# Ontology functions
+#
+
+
+@cli.command(help='Get Ontology address for specified path.')
+@click.option('-n', '--address', required=True, help="BIP-32 path, e.g. m/44'/888'/0'/0/0")
+@click.option('-d', '--show-display', is_flag=True)
+@click.pass_obj
+def ontology_get_address(connect, address, show_display):
+    client = connect()
+    address_n = tools.parse_path(address)
+    return ontology.get_address(client, address_n, show_display)
+
+
+@cli.command(help='Get Ontology public key for specified path.')
+@click.option('-n', '--address', required=True, help="BIP-32 path, e.g. m/44'/888'/0'/0/0")
+@click.option('-d', '--show-display', is_flag=True)
+@click.pass_obj
+def ontology_get_public_key(connect, address, show_display):
+    client = connect()
+    address_n = tools.parse_path(address)
+    res = ontology.get_public_key(client, address_n, show_display)
+    output = {
+        "public_key": binascii.hexlify(res.public_key).decode()
+    }
+    return output
+
+
+@cli.command(help='Sign Ontology transfer.')
+@click.option('-n', '--address', required=True, help="BIP-32 path to signing key, e.g. m/44'/888'/0'/0/0")
+@click.argument('transaction')
+@click.argument('transfer')
+@click.pass_obj
+def ontology_sign_transfer(connect, address, transaction, transfer):
+    client = connect()
+    address_n = tools.parse_path(address)
+
+    result = ontology.sign_transfer(client, address_n, transaction, transfer)
+
+    payload = {
+        "signature": binascii.hexlify(result.signature).decode()
+    }
+
+    return payload
+
+@cli.command(help='Sign Ontology withdraw Ong.')
+@click.option('-n', '--address', required=True, help="BIP-32 path to signing key, e.g. m/44'/888'/0'/0/0")
+@click.argument('transaction')
+@click.argument('withdraw_ong')
+@click.pass_obj
+def ontology_sign_withdraw_ong(connect, address, transaction, withdraw_ong):
+    client = connect()
+    address_n = tools.parse_path(address)
+
+    result = ontology.sign_withdrawal(client, address_n, transaction, withdraw_ong)
+
+    payload = {
+        "signature": binascii.hexlify(result.signature).decode()
+    }
+
+    return payload
+
+@cli.command(help='Sign Ontology ONT ID Registration.')
+@click.option('-n', '--address', required=True, help="BIP-32 path to signing key, e.g. m/44'/888'/0'/0/0")
+@click.argument('transaction')
+@click.argument('ont_id_register')
+@click.pass_obj
+def ontology_sign_ont_id_register(connect, address, transaction, ont_id_register):
+    client = connect()
+    address_n = tools.parse_path(address)
+
+    result = ontology.sign_register(client, address_n, transaction, ont_id_register)
+
+    payload = {
+        "signature": binascii.hexlify(result.signature).decode()
+    }
+
+    return payload
+
+@cli.command(help='Sign Ontology ONT ID Attributes adding.')
+@click.option('-n', '--address', required=True, help="BIP-32 path to signing key, e.g. m/44'/888'/0'/0/0")
+@click.argument('transaction')
+@click.argument('ont_id_add_attributes')
+@click.pass_obj
+def ontology_sign_ont_id_add_attributes(connect, address, transaction, ont_id_add_attributes):
+    client = connect()
+    address_n = tools.parse_path(address)
+
+    result = ontology.sign_add_attr(client, address_n, transaction, ont_id_add_attributes)
+
+    payload = {
+        "signature": binascii.hexlify(result.signature).decode()
+    }
+
+    return payload
 
 #
 # Main
