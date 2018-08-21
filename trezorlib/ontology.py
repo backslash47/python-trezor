@@ -50,3 +50,23 @@ def sign_register(client, address_n, t, r):
 @expect(messages.OntologySignedOntIdAddAttributes)
 def sign_add_attr(client, address_n, t, a):
     return client.call(messages.OntologySignOntIdAddAttributes(address_n=address_n, transaction=t, ont_id_add_attributes=a))
+
+def create_transaction_msg(transaction) -> messages.OntologyTransaction:
+    # TODO Implement JSON => Protobuf conversion of the parameter
+    raise NotImplementedError()
+
+def create_transfer_msg(transfer) -> messages.OntologyTransfer:
+    # TODO Implement JSON => Protobuf conversion of the parameter
+    raise NotImplementedError()
+
+def create_withdraw_ong_msg(withdraw_ong) -> messages.OntologyWithdrawOng:
+    # TODO Implement JSON => Protobuf conversion of the parameter
+    raise NotImplementedError()
+
+def create_ont_id_register_msg(register) -> messages.OntologyOntIdRegister:
+    # TODO Implement JSON => Protobuf conversion of the parameter
+    raise NotImplementedError()
+
+def create_ont_id_add_attributes_msg(add_attributes) -> messages.OntologyOntIdAddAttributes:
+    # TODO Implement JSON => Protobuf conversion of the parameter
+    raise NotImplementedError()
