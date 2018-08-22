@@ -1433,11 +1433,9 @@ def ontology_get_address(connect, address, show_display):
 def ontology_get_public_key(connect, address, show_display):
     client = connect()
     address_n = tools.parse_path(address)
-    res = ontology.get_public_key(client, address_n, show_display)
-    output = {
-        "public_key": binascii.hexlify(res.public_key).decode()
-    }
-    return output
+    result = ontology.get_public_key(client, address_n, show_display)
+    
+    return binascii.hexlify(result.public_key).decode()
 
 
 @cli.command(help='Sign Ontology transfer.')
@@ -1453,11 +1451,12 @@ def ontology_sign_transfer(connect, address, transaction_f, transfer_f):
 
     result = ontology.sign_transfer(client, address_n, transaction, transfer)
 
-    payload = {
+    output = {
+        "payload": binascii.hexlify(result.payload).decode(),
         "signature": binascii.hexlify(result.signature).decode()
     }
 
-    return payload
+    return output
 
 @cli.command(help='Sign Ontology withdraw Ong.')
 @click.option('-n', '--address', required=True, help="BIP-32 path to signing key, e.g. m/44'/888'/0'/0/0")
@@ -1472,11 +1471,12 @@ def ontology_sign_withdraw_ong(connect, address, transaction_f, withdraw_ong_f):
 
     result = ontology.sign_withdrawal(client, address_n, transaction, withdraw_ong)
 
-    payload = {
+    output = {
+        "payload": binascii.hexlify(result.payload).decode(),
         "signature": binascii.hexlify(result.signature).decode()
     }
 
-    return payload
+    return output
 
 @cli.command(help='Sign Ontology ONT ID Registration.')
 @click.option('-n', '--address', required=True, help="BIP-32 path to signing key, e.g. m/44'/888'/0'/0/0")
@@ -1493,11 +1493,12 @@ def ontology_sign_ont_id_register(connect, address, transaction_f, ont_id_regist
 
     result = ontology.sign_register(client, address_n, transaction, ont_id_register)
 
-    payload = {
+    output = {
+        "payload": binascii.hexlify(result.payload).decode(),
         "signature": binascii.hexlify(result.signature).decode()
     }
 
-    return payload
+    return output
 
 @cli.command(help='Sign Ontology ONT ID Attributes adding.')
 @click.option('-n', '--address', required=True, help="BIP-32 path to signing key, e.g. m/44'/888'/0'/0/0")
@@ -1512,11 +1513,12 @@ def ontology_sign_ont_id_add_attributes(connect, address, transaction_f, ont_id_
 
     result = ontology.sign_add_attr(client, address_n, transaction, ont_id_add_attributes)
 
-    payload = {
+    output = {
+        "payload": binascii.hexlify(result.payload).decode(),
         "signature": binascii.hexlify(result.signature).decode()
     }
 
-    return payload
+    return output
 
 #
 # Main
