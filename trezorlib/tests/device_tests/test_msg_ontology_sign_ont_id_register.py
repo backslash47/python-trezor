@@ -15,16 +15,12 @@
 # If not, see <https://www.gnu.org/licenses/lgpl-3.0.html>.
 
 import pytest
+import time
 
 from .common import TrezorTest
-from .common import TrezorTest
-from .conftest import TREZOR_VERSION
-from binascii import hexlify, unhexlify
+from binascii import unhexlify
 from trezorlib import messages
-from trezorlib import ontology
-from trezorlib.client import CallException
 from trezorlib.tools import parse_path
-import time
 
 
 @pytest.mark.xfail
