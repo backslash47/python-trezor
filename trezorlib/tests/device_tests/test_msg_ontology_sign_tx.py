@@ -52,7 +52,6 @@ class TestMsgOntologySigntx(TrezorTest):
         assert signature.payload == unhexlify('7900c66b140b045b101bc9fabaf181e251a38e76b73962111b6a7cc814e885e849e7f545ea84e8c555b86c70e4f751c4ec6a7cc80864000000000000006a7cc86c51c1087472616e736665721400000000000000000000000000000000000000010068164f6e746f6c6f67792e4e61746976652e496e766f6b65')
         assert signature.signature == unhexlify('0102f9b0c43b2ed35aa89b0927a60e692cb8a74280c2da819a909150c8b3fd2b0b401806c97797fcc4b93d34f210ad01740cfd13b720a389a80f384c1f94fb749e')
 
-
     def test_ontology_sign_transfer_ong(self):
         self.setup_mnemonic_nopin_nopassphrase()
 
