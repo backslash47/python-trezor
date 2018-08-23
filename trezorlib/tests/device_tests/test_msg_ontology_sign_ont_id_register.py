@@ -32,9 +32,9 @@ class TestMsgOntologySignOntIdRegister(TrezorTest):
         self.setup_mnemonic_nopin_nopassphrase()
 
         transaction = messages.OntologyTransaction(
-            version= 0x00, 
+            version=0x00,
             nonce=0x7f7f1ceb,
-            type= 0xd1,
+            type=0xd1,
             gas_price=500,
             gas_limit=30000,
             payer='AGn8JFPGM5S4jkWhTC89Xtz1Y76sPz29Rc',

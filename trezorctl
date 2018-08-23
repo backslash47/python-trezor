@@ -1434,7 +1434,7 @@ def ontology_get_public_key(connect, address, show_display):
     client = connect()
     address_n = tools.parse_path(address)
     result = ontology.get_public_key(client, address_n, show_display)
-    
+
     return binascii.hexlify(result.public_key).decode()
 
 
@@ -1458,6 +1458,7 @@ def ontology_sign_transfer(connect, address, transaction_f, transfer_f):
 
     return output
 
+
 @cli.command(help='Sign Ontology withdraw Ong.')
 @click.option('-n', '--address', required=True, help="BIP-32 path to signing key, e.g. m/44'/888'/0'/0/0")
 @click.option('-tx', '--transaction', type=click.File('r'), default='-', help='Transaction in JSON format')
@@ -1477,6 +1478,7 @@ def ontology_sign_withdraw_ong(connect, address, transaction_f, withdraw_ong_f):
     }
 
     return output
+
 
 @cli.command(help='Sign Ontology ONT ID Registration.')
 @click.option('-n', '--address', required=True, help="BIP-32 path to signing key, e.g. m/44'/888'/0'/0/0")
@@ -1499,6 +1501,7 @@ def ontology_sign_ont_id_register(connect, address, transaction_f, ont_id_regist
     }
 
     return output
+
 
 @cli.command(help='Sign Ontology ONT ID Attributes adding.')
 @click.option('-n', '--address', required=True, help="BIP-32 path to signing key, e.g. m/44'/888'/0'/0/0")

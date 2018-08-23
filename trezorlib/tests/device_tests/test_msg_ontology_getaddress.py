@@ -30,8 +30,8 @@ class TestMsgOntologyGetaddress(TrezorTest):
         self.setup_mnemonic_nopin_nopassphrase()
 
         assert ontology.get_address(self.client, parse_path("m/44'/1024'/0'/0/0")) == 'ANzeepWmi9hoLBA3UiwVhUm7Eku196VUHk'
-    
-    
+
+
     def test_ontology_get_neo_address(self):
         self.setup_mnemonic_nopin_nopassphrase()
         
