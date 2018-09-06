@@ -15,7 +15,7 @@
 # If not, see <https://www.gnu.org/licenses/lgpl-3.0.html>.
 
 
-from . import messages, tools
+from . import messages
 from .tools import expect
 
 #
