@@ -1446,8 +1446,8 @@ def ontology_get_public_key(connect, address, show_display):
 def ontology_sign_transfer(connect, address, transaction_f, transfer_f):
     client = connect()
     address_n = tools.parse_path(address)
-    transaction = ontology.create_transaction_msg(json.load(transaction_f))
-    transfer = ontology.create_transfer_msg(json.load(transfer_f))
+    transaction = protobuf.dict_to_proto(proto.OntologyTransaction, json.load(transaction_f))
+    transfer = protobuf.dict_to_proto(proto.OntologyTransfer, json.load(transfer_f))
 
     result = ontology.sign_transfer(client, address_n, transaction, transfer)
 
@@ -1467,8 +1467,8 @@ def ontology_sign_transfer(connect, address, transaction_f, transfer_f):
 def ontology_sign_withdraw_ong(connect, address, transaction_f, withdraw_ong_f):
     client = connect()
     address_n = tools.parse_path(address)
-    transaction = ontology.create_transaction_msg(json.load(transaction_f))
-    withdraw_ong = ontology.create_withdraw_ong_msg(json.load(withdraw_ong_f))
+    transaction = protobuf.dict_to_proto(proto.OntologyTransaction, json.load(transaction_f))
+    withdraw_ong = protobuf.dict_to_proto(proto.OntologyWithdrawOng, json.load(withdraw_ong_f))
 
     result = ontology.sign_withdrawal(client, address_n, transaction, withdraw_ong)
 
@@ -1490,8 +1490,8 @@ def ontology_sign_withdraw_ong(connect, address, transaction_f, withdraw_ong_f):
 def ontology_sign_ont_id_register(connect, address, transaction_f, ont_id_register_f):
     client = connect()
     address_n = tools.parse_path(address)
-    transaction = ontology.create_transaction_msg(json.load(transaction_f))
-    ont_id_register = ontology.create_ont_id_register_msg(json.load(ont_id_register_f))
+    transaction = protobuf.dict_to_proto(proto.OntologyTransaction, json.load(transaction_f))
+    ont_id_register = protobuf.dict_to_proto(proto.OntologyOntIdRegister, json.load(ont_id_register_f))
 
     result = ontology.sign_register(client, address_n, transaction, ont_id_register)
 
@@ -1511,8 +1511,8 @@ def ontology_sign_ont_id_register(connect, address, transaction_f, ont_id_regist
 def ontology_sign_ont_id_add_attributes(connect, address, transaction_f, ont_id_add_attributes_f):
     client = connect()
     address_n = tools.parse_path(address)
-    transaction = ontology.create_transaction_msg(json.load(transaction_f))
-    ont_id_add_attributes = ontology.create_ont_id_add_attributes_msg(json.load(ont_id_add_attributes_f))
+    transaction = protobuf.dict_to_proto(proto.OntologyTransaction, json.load(transaction_f))
+    ont_id_add_attributes = protobuf.dict_to_proto(proto.OntologyOntIdAddAttributes, json.load(ont_id_add_attributes_f))
 
     result = ontology.sign_add_attr(client, address_n, transaction, ont_id_add_attributes)
 
