@@ -14,11 +14,8 @@
 # You should have received a copy of the License along with this library.
 # If not, see <https://www.gnu.org/licenses/lgpl-3.0.html>.
 
-import base64
-import struct
 
-from . import messages
-from . import tools
+from . import messages, tools
 from .tools import expect
 
 #
@@ -26,31 +23,49 @@ from .tools import expect
 #
 
 
-@expect(messages.OntologyAddress, field='address')
+@expect(messages.OntologyAddress, field="address")
 def get_address(client, address_n, show_display=False):
-    return client.call(messages.OntologyGetAddress(address_n=address_n, show_display=show_display))
+    return client.call(
+        messages.OntologyGetAddress(address_n=address_n, show_display=show_display)
+    )
 
 
 @expect(messages.OntologyPublicKey)
 def get_public_key(client, address_n, show_display=False):
-    return client.call(messages.OntologyGetPublicKey(address_n=address_n, show_display=show_display))
+    return client.call(
+        messages.OntologyGetPublicKey(address_n=address_n, show_display=show_display)
+    )
 
 
 @expect(messages.OntologySignedTransfer)
 def sign_transfer(client, address_n, t, tr):
-    return client.call(messages.OntologySignTransfer(address_n=address_n, transaction=t, transfer=tr))
+    return client.call(
+        messages.OntologySignTransfer(address_n=address_n, transaction=t, transfer=tr)
+    )
 
 
 @expect(messages.OntologySignedWithdrawOng)
 def sign_withdrawal(client, address_n, t, w):
-    return client.call(messages.OntologySignWithdrawOng(address_n=address_n, transaction=t, withdraw_ong=w))
+    return client.call(
+        messages.OntologySignWithdrawOng(
+            address_n=address_n, transaction=t, withdraw_ong=w
+        )
+    )
 
 
 @expect(messages.OntologySignedOntIdRegister)
 def sign_register(client, address_n, t, r):
-    return client.call(messages.OntologySignOntIdRegister(address_n=address_n, transaction=t, ont_id_register=r))
+    return client.call(
+        messages.OntologySignOntIdRegister(
+            address_n=address_n, transaction=t, ont_id_register=r
+        )
+    )
 
 
 @expect(messages.OntologySignedOntIdAddAttributes)
 def sign_add_attr(client, address_n, t, a):
-    return client.call(messages.OntologySignOntIdAddAttributes(address_n=address_n, transaction=t, ont_id_add_attributes=a))
+    return client.call(
+        messages.OntologySignOntIdAddAttributes(
+            address_n=address_n, transaction=t, ont_id_add_attributes=a
+        )
+    )

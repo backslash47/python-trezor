@@ -16,22 +16,28 @@
 
 import pytest
 
-from .common import TrezorTest
 from trezorlib import ontology
 from trezorlib.tools import parse_path
+
+from .common import TrezorTest
 
 
 @pytest.mark.xfail
 @pytest.mark.ontology
 @pytest.mark.skip_t1
 class TestMsgOntologyGetaddress(TrezorTest):
-
     def test_ontology_get_ont_address(self):
         self.setup_mnemonic_nopin_nopassphrase()
 
-        assert ontology.get_address(self.client, parse_path("m/44'/1024'/0'/0/0")) == 'ANzeepWmi9hoLBA3UiwVhUm7Eku196VUHk'
+        assert (
+            ontology.get_address(self.client, parse_path("m/44'/1024'/0'/0/0"))
+            == "ANzeepWmi9hoLBA3UiwVhUm7Eku196VUHk"
+        )
 
     def test_ontology_get_neo_address(self):
         self.setup_mnemonic_nopin_nopassphrase()
 
-        assert ontology.get_address(self.client, parse_path("m/44'/888'/0'/0/0")) == 'AZEMburLePcdfqBFnVfdbsXKiBSnmtgFZr'
+        assert (
+            ontology.get_address(self.client, parse_path("m/44'/888'/0'/0/0"))
+            == "AZEMburLePcdfqBFnVfdbsXKiBSnmtgFZr"
+        )
